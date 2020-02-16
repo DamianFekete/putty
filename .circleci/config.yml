@@ -1,0 +1,38 @@
+version: 2.1
+
+orbs:
+  win: circleci/windows@1.0.0
+
+jobs:
+  build:
+    executor:
+      name: win/vs2019
+      shell: cmd.exe
+    steps:
+      - checkout
+      - run:
+          name: "Run Build step"
+          command: cd windows & nmake -f Makefile.vc
+      - store_artifacts:
+          path: .\windows\pageant.exe
+
+      - store_artifacts:
+          path: .\LICENCE
+      - store_artifacts:
+          path: .\windows\pageant.exe
+      - store_artifacts:
+          path: .\windows\plink.exe
+      - store_artifacts:
+          path: .\windows\pscp.exe
+      - store_artifacts:
+          path: .\windows\psftp.exe
+#      - store_artifacts:
+#          path: .\windows\putty.chm
+      - store_artifacts:
+          path: .\windows\putty.exe
+      - store_artifacts:
+          path: .\windows\puttygen.exe
+      - store_artifacts:
+          path: .\windows\README-msi.txt
+      - store_artifacts:
+          path: .\windows\website.url
